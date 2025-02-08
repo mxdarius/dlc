@@ -1,39 +1,64 @@
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+@import url('https://fonts.cdnfonts.com/css/druk-wide-bold');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Druk Wide Bold';
+  src: local('Druk Wide Bold'), url('https://fonts.cdnfonts.com/s/54584/DrukWide-Bold-Trial.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "SF Pro Display", Inter, system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1a1a1a;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #E5E5E5;
+  background-color: #000000;
 }
 
 @layer base {
+  * {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
   body {
-    @apply min-h-screen bg-primary text-secondary;
+    @apply min-h-screen text-secondary;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(145deg, #000000 0%, #0a0a0a 100%);
+  }
+
+  #root {
+    @apply w-full max-w-7xl mx-auto px-[clamp(0.25rem,0.75vw,0.75rem)];
   }
 }
 
 @layer components {
+  .site-link {
+    @apply fixed top-0 z-50 bg-white text-black px-3 h-[18px] flex items-center justify-center uppercase tracking-[0.2em] hover:bg-black hover:text-white;
+    font-family: 'Druk Wide Bold';
+    right: calc((100% - min(100%, 1250px))/2 + clamp(0.25rem,0.75vw,0.75rem));
+  }
   .btn {
-    @apply px-4 py-2 rounded-lg transition-all duration-200;
+    @apply px-4 py-2 rounded-none border-b-2 border-transparent transition-all duration-300 ease-in-out text-secondary bg-black hover:border-b-[2px] hover:border-white font-['Druk_Wide_Bold'] uppercase tracking-ultra;
   }
   
   .btn-primary {
-    @apply bg-accent text-white hover:bg-accent-hover;
+    @apply bg-black text-secondary border-b-2 border-secondary hover:border-white;
   }
   
   .card {
-    @apply bg-surface p-4 rounded-lg hover:bg-surface-hover transition-colors duration-200;
+    @apply bg-surface p-2 sm:p-3 hover:bg-black border-b-2 border-secondary/10 transition-all duration-300 ease-in-out w-full max-w-full;
+  }
+
+  .card h2 {
+    @apply font-['Druk_Wide_Bold'] uppercase tracking-ultra;
   }
 }
 
@@ -42,14 +67,13 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
