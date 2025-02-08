@@ -77,43 +77,43 @@ function App() {
       <a href="https://dariusatsu.com" className="site-link" target="_blank" rel="noopener noreferrer">
         dariusatsu.com
       </a>
-      <div className="container mx-auto py-[clamp(0.25rem,0.75vw,0.75rem)] px-[clamp(0.125rem,0.5vw,0.5rem)] w-[min(100%,1400px)] transition-all duration-300 ease-in-out">
-        <div className="w-full bg-surface/80 px-[clamp(0.25rem,1vw,1rem)] py-[clamp(0.5rem,1.25vw,1rem)] mb-[clamp(0.5rem,1.5vw,1.25rem)] overflow-hidden transition-all duration-300 ease-in-out">
-        <h1 
-  className="font-['Druk_Wide_Bold'] tracking-ultra uppercase w-full text-center px-0 transition-all duration-300 ease-in-out" 
-  style={{ 
-    fontSize: 'min(calc(3.7vw), calc(100vw / 30), 3.1rem)', // Uses calc for responsive scaling, caps at 4.5rem
-    lineHeight: '1.1', 
-    letterSpacing: '0.02em', 
-    whiteSpace: 'nowrap',
-    width: '100%', 
-    textAlign: 'justify', // Ensures text spans the full width
-    padding: '0', 
-    overflow: 'hidden', 
-    display: 'flex',
-    justifyContent: 'center',
-  }}>
-            DATA LANGUAGE CHEATSHEET
-          </h1>
+      <div className="container mx-auto py-[clamp(0.25rem,0.75vw,0.75rem)] px-[clamp(0.125rem,0.5vw,0.5rem)] w-[min(100%,1400px)] transition-all duration-300 ease-in-out pt-[60px]">
+        <div className="w-full bg-surface/80 px-[clamp(0.25rem,1vw,1rem)] py-[clamp(0.5rem,1.25vw,1rem)] mb-12 overflow-hidden transition-all duration-300 ease-in-out">
+          <h1 
+            className="font-['Druk_Wide_Bold'] tracking-ultra uppercase w-full text-center px-0 transition-all duration-300 ease-in-out" 
+            style={{ 
+              fontSize: 'min(calc(3.7vw), calc(100vw / 30), 3.1rem)',
+              lineHeight: '1.1', 
+              letterSpacing: '0.02em', 
+              whiteSpace: 'nowrap',
+              width: '100%', 
+              textAlign: 'justify', // Ensures text spans the full width
+              padding: '0', 
+              overflow: 'hidden', 
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+              DATA LANGUAGE CHEATSHEET
+            </h1>
         </div>
 
         {/* Language Selection */}
         <div className="mb-8 flex space-x-4">
           <button
             onClick={() => setSelectedLanguage("sql")}
-            className={`btn ${selectedLanguage === "sql" ? "btn-primary" : "bg-surface/60 text-secondary/80 hover:bg-surface-hover"}`}
+            className={`btn text-[clamp(0.8rem,2vw,1rem)] ${selectedLanguage === "sql" ? "btn-primary" : "bg-surface/60 text-secondary/80 hover:bg-surface-hover"}`}
           >
             SQL
           </button>
           <button
             onClick={() => setSelectedLanguage("powerquery")}
-            className={`btn ${selectedLanguage === "powerquery" ? "btn-primary" : "bg-surface/60 text-secondary/80 hover:bg-surface-hover"}`}
+            className={`btn text-[clamp(0.8rem,2vw,1rem)] ${selectedLanguage === "powerquery" ? "btn-primary" : "bg-surface/60 text-secondary/80 hover:bg-surface-hover"}`}
           >
             Power Query
           </button>
           <button
             onClick={() => setSelectedLanguage("dax")}
-            className={`btn ${selectedLanguage === "dax" ? "btn-primary" : "bg-surface/60 text-secondary/80 hover:bg-surface-hover"}`}
+            className={`btn text-[clamp(0.8rem,2vw,1rem)] ${selectedLanguage === "dax" ? "btn-primary" : "bg-surface/60 text-secondary/80 hover:bg-surface-hover"}`}
           >
             DAX
           </button>
@@ -131,33 +131,35 @@ function App() {
           />
         </div>
 
-        {/* Quick Access Buttons */}
-        <div className="flex gap-4 mb-8">
-          <button
-            onClick={() => {
-              const section = loadedSections.find(s => s.id === 'sql-function-index');
-              if (section) setSelectedSection(section);
-            }}
-            className="btn bg-surface/60 text-secondary/80 hover:bg-surface-hover"
-          >
-            Function Index
-          </button>
-          <button
-            onClick={() => {
-              const section = loadedSections.find(s => s.id === 'real-world-sql');
-              if (section) setSelectedSection(section);
-            }}
-            className="btn bg-surface/60 text-secondary/80 hover:bg-surface-hover"
-          >
-            Real-World SQL Use Cases
-          </button>
-        </div>
+        {/* Quick Access Buttons - Only show for SQL */}
+        {selectedLanguage === "sql" && (
+          <div className="flex gap-4 mb-8">
+            <button
+              onClick={() => {
+                const section = loadedSections.find(s => s.id === 'sql-function-index');
+                if (section) setSelectedSection(section);
+              }}
+              className="btn text-[clamp(0.8rem,2vw,1rem)] bg-surface/60 text-secondary/80 hover:bg-surface-hover"
+            >
+              Function Index
+            </button>
+            <button
+              onClick={() => {
+                const section = loadedSections.find(s => s.id === 'real-world-sql');
+                if (section) setSelectedSection(section);
+              }}
+              className="btn text-[clamp(0.8rem,2vw,1rem)] bg-surface/60 text-secondary/80 hover:bg-surface-hover"
+            >
+              Real-World SQL Use Cases
+            </button>
+          </div>
+        )}
 
         {/* Sections Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {Object.entries(groupedSections).map(([category, categorySections]) => (
             <div key={category} className="card">
-              <h2 className="text-2xl font-semibold mb-4">{categories[category as keyof typeof categories]}</h2>
+              <h2 className="text-[clamp(1.2rem,2.5vw,1.5rem)] font-semibold mb-4">{categories[category as keyof typeof categories]}</h2>
               <div className="space-y-2">
                 {categorySections.map((section) => (
                   <button
@@ -175,24 +177,26 @@ function App() {
 
         {/* Selected Section Details */}
         {selectedSection && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto" onClick={() => setSelectedSection(null)}>
-            <div className="bg-surface max-w-4xl w-full p-6 rounded-lg shadow-xl max-h-[90vh] overflow-y-auto my-4" onClick={(e) => e.stopPropagation()}>
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={() => setSelectedSection(null)}>
+            <div className="bg-surface w-full max-h-[90vh] p-6 rounded-lg shadow-xl flex flex-col" onClick={(e) => e.stopPropagation()}>
               <h3 className="text-xl font-bold mb-4">{selectedSection.title}</h3>
               <p className="mb-4">{selectedSection.content}</p>
-              {selectedSection.code && (
-                <pre className="p-4 bg-surface-dark rounded-md overflow-x-auto mb-4">
-                  <code className={`language-${selectedLanguage}`} dangerouslySetInnerHTML={{
-                    __html: Prism.highlight(
-                      selectedSection.code,
-                      selectedLanguage === 'dax' ? Prism.languages.javascript : Prism.languages[selectedLanguage],
-                      selectedLanguage === 'dax' ? 'javascript' : selectedLanguage
-                    )
-                  }} />
-                </pre>
-              )}
+              <div className="overflow-y-auto">
+                {selectedSection.code && (
+                  <pre className="p-4 bg-surface-dark rounded-md overflow-x-auto">
+                    <code className={`language-${selectedLanguage}`} dangerouslySetInnerHTML={{
+                      __html: Prism.highlight(
+                        selectedSection.code,
+                        selectedLanguage === 'dax' ? Prism.languages.javascript : Prism.languages[selectedLanguage],
+                        selectedLanguage === 'dax' ? 'javascript' : selectedLanguage
+                      )
+                    }} />
+                  </pre>
+                )}
+              </div>
               <button
                 onClick={() => setSelectedSection(null)}
-                className="btn btn-primary"
+                className="btn btn-primary mt-4"
               >
                 Close
               </button>
